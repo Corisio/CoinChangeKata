@@ -21,9 +21,25 @@ namespace CoinChangeKata
 
             amount = GetParsedValues(args, coinValues, amount);
 
-            change[0] = amount;
+            GetCoinsForChange(change, amount, coinValues);
 
             return change;
+        }
+
+        private static void GetCoinsForChange(int[] change, int amount, int[] coinValues)
+        {
+            while (amount > 0)
+            {
+                for (int i = coinValues.Length - 1; i >= 0; i--)
+                {
+                    if (amount - coinValues[i] >= 0)
+                    {
+                        amount -= coinValues[i];
+                        change[i]++;
+                        break;
+                    }
+                }
+            }
         }
 
         private static int GetParsedValues(string[] args, int[] coinValues, int amount)

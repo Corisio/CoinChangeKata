@@ -89,5 +89,20 @@ namespace CoinChangeKata.Tests
                 Assert.AreEqual(2, numberOfCoins);
             }
         }
+
+        [TestCase("6,1,5,10,25,100", "1,1,0,0,0")]
+        [TestCase("11,1,5,10,25,100", "1,0,1,0,0")]
+        public void return_valid_number_of_coins_for_multiple_coin_values(string arguments, string expectedResult)
+        {
+            var parsedExpectedResult = expectedResult.Split(',').Select(int.Parse).ToArray();
+            var result = _coinChanger.GetChange(arguments.Split(','));
+
+            Assert.AreEqual(parsedExpectedResult.Length, result.Length);
+
+            for (int i = 0; i < parsedExpectedResult.Length; i++)
+            {
+                Assert.AreEqual(parsedExpectedResult[i], result[i]);
+            }
+        }
     }
 }
