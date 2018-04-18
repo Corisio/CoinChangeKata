@@ -15,9 +15,13 @@ namespace CoinChangeKata
                 throw new Exception();
             }
 
-            if (!Decimal.TryParse(args[0], out decimal output))
+            foreach (var value in args)
             {
-                throw new Exception();
+                if (!Decimal.TryParse(value, out decimal output) || output < 0 || output != Math.Truncate(output))
+                {
+                    throw new ArgumentException($"Invalid value ({output}");
+                }
+
             }
         }
     }
