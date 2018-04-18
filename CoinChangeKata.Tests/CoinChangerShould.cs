@@ -42,7 +42,7 @@ namespace CoinChangeKata.Tests
             Assert.Throws<ArgumentException>(() => _coinChanger.GetChange(argument.Split(',')));
         }
 
-        [TestCase("0,1,2,5,10,20,50,100,200")]
+        [TestCase("22,1,2,5,10,20,50,100,200")]
         public void return_not_empty_result_when_the_values_are_valid(string argument)
         {
             var result = _coinChanger.GetChange(argument.Split(','));
@@ -52,7 +52,7 @@ namespace CoinChangeKata.Tests
         }
 
         [TestCase("0,1,2,5,10,20,50,100,200")]
-        public void return_all_zeroes_when_the_change_is_zero(string argument)
+        public void return_all_zeroes_when_the_amount_is_zero(string argument)
         {
             var result = _coinChanger.GetChange(argument.Split(','));
 
@@ -60,6 +60,12 @@ namespace CoinChangeKata.Tests
             {
                 Assert.AreEqual(0, numberOfCoins);
             }
+        }
+
+        [TestCase("1,5")]
+        public void throw_exception_when_the_amount_is_not_zero_and_lower_than_the_smallest_coin(string argument)
+        {
+            Assert.Throws<Exception>(() => _coinChanger.GetChange(argument.Split(',')));
         }
 
         [Test]
@@ -70,6 +76,17 @@ namespace CoinChangeKata.Tests
             foreach (var numberOfCoins in result)
             {
                 Assert.AreEqual(1, numberOfCoins);
+            }
+        }
+
+        [Test]
+        public void return_two_one_coins_for_two_as_input()
+        {
+            var result = _coinChanger.GetChange(new[] {"2", "1"});
+
+            foreach (var numberOfCoins in result)
+            {
+                Assert.AreEqual(2, numberOfCoins);
             }
         }
     }

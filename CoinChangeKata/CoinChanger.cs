@@ -10,26 +10,23 @@ namespace CoinChangeKata
     {
         public int[] GetChange(string[] args)
         {
-            var change = 0;
+            var amount = 0;
             int[] coinValues = new int[args.Length - 1];
-            int[] result = new int[args.Length - 1];
+            int[] change = new int[args.Length - 1];
 
             if (args.Length < 2)
             {
                 throw new Exception();
             }
 
-            change = GetParsedValues(args, coinValues, change);
+            amount = GetParsedValues(args, coinValues, amount);
 
-            if (change == 1)
-            {
-                result[0] = 1;
-            }
+            change[0] = amount;
 
-            return result;
+            return change;
         }
 
-        private static int GetParsedValues(string[] args, int[] coinValues, int change)
+        private static int GetParsedValues(string[] args, int[] coinValues, int amount)
         {
             for (var i = 0; i < args.Length; i++)
             {
@@ -45,11 +42,16 @@ namespace CoinChangeKata
                 }
                 else
                 {
-                    change = output;
+                    amount = output;
                 }
             }
 
-            return change;
+            if (amount < coinValues[0] && amount > 0)
+            {
+                throw new Exception();
+            }
+
+            return amount;
         }
     }
 }
