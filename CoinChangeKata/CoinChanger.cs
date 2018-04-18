@@ -14,6 +14,11 @@ namespace CoinChangeKata
             {
                 throw new Exception();
             }
+
+            if (!Decimal.TryParse(args[0], out decimal output))
+            {
+                throw new Exception();
+            }
         }
     }
 }

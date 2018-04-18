@@ -28,5 +28,12 @@ namespace CoinChangeKata.Tests
         {
             Assert.Throws<Exception>(() => _coinChanger.GetChange(new[] { argument }));
         }
+
+        [TestCase("a,1")]
+        [TestCase("j,7")]
+        public void throw_exception_when_first_argument_is_not_a_number(string argument)
+        {
+            Assert.Throws<Exception>(() => _coinChanger.GetChange( argument.Split(',') ));
+        }
     }
 }
