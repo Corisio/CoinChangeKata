@@ -8,5 +8,12 @@ namespace CoinChangeKata
 {
     public class CoinChanger
     {
+        public void GetChange(string[] args)
+        {
+            if (args.Length < 2)
+            {
+                throw new Exception();
+            }
+        }
     }
 }

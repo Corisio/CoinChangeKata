@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApprovalTest.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="CoinChangerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
