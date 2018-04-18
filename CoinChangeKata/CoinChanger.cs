@@ -8,21 +8,33 @@ namespace CoinChangeKata
 {
     public class CoinChanger
     {
-        public void GetChange(string[] args)
+        public int[] GetChange(string[] args)
         {
+            int[] result = new int [args.Length - 1];
+
             if (args.Length < 2)
             {
                 throw new Exception();
             }
 
-            foreach (var value in args)
+            for (var i = 0; i < args.Length; i++)
             {
-                if (!Decimal.TryParse(value, out decimal output) || output < 0 || output != Math.Truncate(output))
+                var value = args[i];
+                if (!int.TryParse(value, out int output) || output < 0)
                 {
-                    throw new ArgumentException($"Invalid value ({output}");
+                    throw new ArgumentException($"Invalid value ({output})");
                 }
 
+                if (i > 0)
+                {
+                    if (output == 0)
+                    {
+                        result[i-1] = 0;
+                    }
+                }
             }
+
+            return result;
         }
     }
 }

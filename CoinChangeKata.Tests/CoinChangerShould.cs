@@ -41,5 +41,25 @@ namespace CoinChangeKata.Tests
         {
             Assert.Throws<ArgumentException>(() => _coinChanger.GetChange(argument.Split(',')));
         }
+
+        [TestCase("0,1")]
+        public void return_not_empty_result_when_the_values_are_valid(string argument)
+        {
+            var result = _coinChanger.GetChange(argument.Split(','));
+
+            Assert.IsNotNull(result);
+            Assert.IsNotEmpty(result);
+        }
+
+        [TestCase("0,1")]
+        public void return_all_zeroes_when_the_change_is_zero(string argument)
+        {
+            var result = _coinChanger.GetChange(argument.Split(','));
+
+            foreach (var numberOfCoins in result)
+            {
+                Assert.AreEqual(0, numberOfCoins);
+            }
+        }
     }
 }
